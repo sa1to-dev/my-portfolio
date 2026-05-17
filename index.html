@@ -2,10 +2,47 @@
 <html>
 <head>
   <title>はじめてのページ</title>
+  <link rel="stylesheet" href="style.css">
+  
+   
 </head>
+ 
 <body>
-  <h1>二のページ</h1>
-  <p>趣味：○○</p>
-　<p>目標：○○</p>
+  <div class="container">
+   <h1>勉強中のページ</h1>
+   <button onclick="changeMessage()">クリックしてね</button>
+   <h2>自己紹介</h2>
+   <p class="intro">勉強しています</p>
+   <h2>好きなWebサイト</h2>
+     <p><a href="https://nstudy.info/" target="_blank">過去問</a>
+     </p> 
+   <h2>好きな画像</h2>
+   <div class="gallery">
+     <img src="image/スクリーンショット_6-4-2026_15223_www.youtube.com.jpeg" alt="プロフィール画像1" width="150">
+     <img src="image/スクリーンショット_6-4-2026_1526_www.youtube.com.jpeg" alt="プロフィール画像2" width="150">
+     <img src="image/スクリーンショット_29-3-2026_221651_search.yahoo.co.jp.jpeg" alt="プロフィール画像3" width="150">
+   </div>
+   <h2>好きなことリスト</h2>
+   <input type="text" id="newItem">
+   <button id="addBtn">追加</button>
+   <button id ="showActive">未完了だけ表示</button>
+   
+    <ul id="list"></ul>
+
+   <h2>カウンター</h2>
+   <h1 id="count">0</h1>
+   <button onclick="plus()">+</button>
+   <button onclick="minus()">-</button>
+
+   <h2>メモ</h2>
+   <input type="text" id="memoInput">
+   <button id="memoBtn">追加</button>
+
+<ul id="memoList"></ul>
+
+  </div>
+  
+  <script src="script.js"></script>
+
 </body>
 </html>
