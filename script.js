@@ -65,7 +65,21 @@ console.log("JSスタート!");
     renderList();
    }
 
-   function renderList(){
+   function updateTaskCount(){
+
+      const activeItems = items.filter(function(item){
+        return item.done === false;
+      });
+
+    document.getElementById("taskCount")
+    .textContent =
+      "未完了:" + activeItems.length + "件";
+  }
+
+  renderList();
+
+
+  function renderList(){
     const list = document.getElementById("list");
     list.innerHTML = "";
 
@@ -88,7 +102,7 @@ console.log("JSスタート!");
       checkbox.checked = items[i].done;
 
       checkbox.onchange = function(){
-        items[i].done = checkbox.checked;
+         items[i].done = checkbox.checked;
          localStorage.setItem("todo", JSON.stringify(items));
          renderList();
       };
@@ -121,6 +135,7 @@ console.log("JSスタート!");
      list.appendChild(li);
      
     }
+      updateTaskCount();
    }
    renderList();
    
@@ -130,9 +145,15 @@ console.log("JSスタート!");
     const activeItems = items.filter(function(item){
       return item.done === false;
     });
-
     console.log(activeItems);
    });
+
+ document.getElementById("showAll")
+ .addEventListener("click",function(){
+    renderList(items);
+  });
+
+    
 
     let num = 0;
 

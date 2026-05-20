@@ -1,17 +1,17 @@
 
     body{
+      min-height:100vh;
+      margin: 0;
       background-color:#fff8dc;/*ページの背景色*/
       color:#333333;/*文字色*/
       font-family: Arial,sans-serif;/*フォント*/
 
-      display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
     }
     .container{
       text-align: center;
+      padding:20px;
     }
     .gallery{
       display: flex;
@@ -84,3 +84,4 @@
     li button:hover{
       background: #cc0000;
     }
+
