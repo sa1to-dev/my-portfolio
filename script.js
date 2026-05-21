@@ -146,14 +146,26 @@ console.log("JSスタート!");
       return item.done === false;
     });
     console.log(activeItems);
+
+    const list = document.getElementById("list");
+     list.innerHTML = "";
+
+     for(let i = 0; i < activeItems.length; i++){
+
+     const li = document.createElement("li");
+
+     li.textContent = activeItems[i].text;
+
+     list.appendChild(li);
+   }
+
    });
 
  document.getElementById("showAll")
  .addEventListener("click",function(){
-    renderList(items);
+  console.log("showAll");
+    renderList();
   });
-
-    
 
     let num = 0;
 
