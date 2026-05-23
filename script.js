@@ -139,7 +139,7 @@ console.log("JSスタート!");
    }
    renderList();
    
-   document.getElementById("showActive")
+ document.getElementById("showActive")
   .addEventListener("click", function () {
 
     const activeItems = items.filter(function(item){
@@ -160,6 +160,25 @@ console.log("JSスタート!");
    }
 
    });
+ document.getElementById("showDone")
+  .addEventListener("click",function(){
+
+    const doneItems = items.filter(function(item){
+      return item.done === true;
+   });
+
+   const list = document.getElementById("list");
+   list.innerHTML = "";
+
+   for(let i = 0; i < doneItems.length; i++){
+
+    const li = document.createElement("li");
+
+    li.textContent = doneItems[i].text;
+
+    list.appendChild(li);
+   }
+  });
 
  document.getElementById("showAll")
  .addEventListener("click",function(){
