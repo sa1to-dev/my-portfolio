@@ -71,9 +71,19 @@ console.log("JSスタート!");
         return item.done === false;
       });
 
+      const doneItems = items.filter(function(item){
+        return item.done === true;
+      });
+
+    document.getElementById("allCount")
+    .textContent = "全件:" +items.length +"件";
+
     document.getElementById("taskCount")
     .textContent =
       "未完了:" + activeItems.length + "件";
+
+    document.getElementById("doneCount")
+    .textContent = "完了済み:" +doneItems.length +"件";
   }
 
   renderList();
