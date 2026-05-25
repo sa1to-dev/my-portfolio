@@ -86,6 +86,30 @@ console.log("JSスタート!");
     .textContent = "完了済み:" +doneItems.length +"件";
   }
 
+  document.getElementById("searchBtn")
+  .addEventListener("click",function(){
+
+    const keyword =
+     document.getElementById("searchInput").value;
+    
+    const result = items.filter(function(item){
+      return item.text.includes(keyword);
+
+    });
+
+    const list = document.getElementById("list");
+
+    list.innerHTML ="";
+
+    for(let i =0; i < result.length; i++){
+      const li = document.createElement("li");
+
+      li.textContent = result[i].text;
+
+      list.appendChild(li);
+    }
+  });
+
   renderList();
 
 
