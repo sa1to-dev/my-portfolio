@@ -22,6 +22,8 @@ console.log("JSスタート!");
     }
 
    let items = JSON.parse(localStorage.getItem("todo")) || [];
+
+   let currentFilter = "all";
    
    const input = document.getElementById("newItem");
    
@@ -56,9 +58,9 @@ console.log("JSスタート!");
     input.value = "";
     }
    
-   function removeItem(index){
+   function removeItem(id){
     items = items.filter(function(item, i){
-      return i !== index;
+      return item.id !== id;
     })
 
     localStorage.setItem("todo",JSON.stringify(items));
@@ -117,26 +119,40 @@ console.log("JSスタート!");
     const list = document.getElementById("list");
     list.innerHTML = "";
 
-   if(items.length === 0){
+     let filteredItems = items;
+
+  if(currentFilter === "active"){
+    filteredItems = items.filter(function(item){
+      return item.done === false;
+    });
+  }
+
+  if(currentFilter === "done"){
+    filteredItems = items.filter(function(item){
+      return item.done === true;
+    });
+  }
+
+   if(filteredItems.length === 0){
     list.innerHTML = "<p>まだ項目がありません</p>";
     return;
     }
 
-    for(let i = 0; i < items.length; i++){
+    for(let i = 0; i < filteredItems.length; i++){
       const li = document.createElement("li");
       
       const span = document.createElement("span");
-      span.textContent = items[i].text;
-      span.style.textDecoration = items[i].done ? "line-through" : "none";
+      span.textContent = filteredItems[i].text;
+      span.style.textDecoration = filteredItems[i].done ? "line-through" : "none";
 
       //チェックボックス
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
 
-      checkbox.checked = items[i].done;
+      checkbox.checked = filteredItems[i].done;
 
       checkbox.onchange = function(){
-         items[i].done = checkbox.checked;
+         filteredItems[i].done = checkbox.checked;
          localStorage.setItem("todo", JSON.stringify(items));
          renderList();
       };
@@ -144,17 +160,17 @@ console.log("JSスタート!");
       const button = document.createElement("button");
       button.textContent = "削除";
       button.onclick = function(){
-      removeItem(i);
+      removeItem(filteredItems[i].id);
       };
 
       const editButton = document.createElement("button");
       editButton.textContent = "編集";
       editButton.onclick = function() {
-         const newText = prompt("変更してください", items[i].text);
+         const newText = prompt("変更してください", filteredItems[i].text);
         
           if (newText !== null && newText.trim() !== "") {
         
-            items[i].text = newText;
+            filteredItems[i].text = newText;
         
             localStorage.setItem("todo", JSON.stringify(items));
         
@@ -176,47 +192,24 @@ console.log("JSスタート!");
  document.getElementById("showActive")
   .addEventListener("click", function () {
 
-    const activeItems = items.filter(function(item){
-      return item.done === false;
+    currentFilter = "active";
+
+    renderList();
+    
     });
-    console.log(activeItems);
 
-    const list = document.getElementById("list");
-     list.innerHTML = "";
-
-     for(let i = 0; i < activeItems.length; i++){
-
-     const li = document.createElement("li");
-
-     li.textContent = activeItems[i].text;
-
-     list.appendChild(li);
-   }
-
-   });
  document.getElementById("showDone")
   .addEventListener("click",function(){
 
-    const doneItems = items.filter(function(item){
-      return item.done === true;
-   });
+     currentFilter = "done";
 
-   const list = document.getElementById("list");
-   list.innerHTML = "";
+    renderList();
 
-   for(let i = 0; i < doneItems.length; i++){
-
-    const li = document.createElement("li");
-
-    li.textContent = doneItems[i].text;
-
-    list.appendChild(li);
-   }
   });
 
  document.getElementById("showAll")
  .addEventListener("click",function(){
-  console.log("showAll");
+  currentFilter = "all";
     renderList();
   });
 
