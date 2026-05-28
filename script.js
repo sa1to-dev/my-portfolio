@@ -170,7 +170,12 @@ console.log("JSスタート!");
         
           if (newText !== null && newText.trim() !== "") {
         
-            filteredItems[i].text = newText;
+            const targetId = filteredItems[i].id;
+            const targetItem = items.find(function(item){
+              return item.id === targetId;
+            });
+
+            targetItem.text = newText;
         
             localStorage.setItem("todo", JSON.stringify(items));
         
