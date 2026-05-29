@@ -114,6 +114,79 @@ console.log("JSスタート!");
 
   renderList();
 
+  function createTodoItem(item){
+
+  const li = document.createElement("li");
+
+  const span = document.createElement("span");
+  span.textContent = item.text;
+  span.style.textDecoration = item.done
+    ? "line-through"
+    : "none";
+
+  // チェックボックス
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+
+  checkbox.checked = item.done;
+
+  checkbox.onchange = function(){
+
+    item.done = checkbox.checked;
+
+    localStorage.setItem(
+      "todo",
+      JSON.stringify(items)
+    );
+
+    renderList();
+  };
+
+  // 削除ボタン
+  const button = document.createElement("button");
+
+  button.textContent = "削除";
+
+  button.onclick = function(){
+    removeItem(item.id);
+  };
+
+  // 編集ボタン
+  const editButton = document.createElement("button");
+
+  editButton.textContent = "編集";
+
+  editButton.onclick = function(){
+
+    const newText = prompt(
+      "変更してください",
+      item.text
+    );
+
+    if(newText !== null && newText.trim() !== ""){
+
+      const targetItem = items.find(function(todo){
+        return todo.id === item.id;
+      });
+
+      targetItem.text = newText;
+
+      localStorage.setItem(
+        "todo",
+        JSON.stringify(items)
+      );
+
+      renderList();
+    }
+  };
+
+  li.appendChild(checkbox);
+  li.appendChild(span);
+  li.appendChild(button);
+  li.appendChild(editButton);
+
+  return li;
+  }
 
   function renderList(){
     const list = document.getElementById("list");
@@ -139,55 +212,10 @@ console.log("JSスタート!");
     }
 
     for(let i = 0; i < filteredItems.length; i++){
-      const li = document.createElement("li");
-      
-      const span = document.createElement("span");
-      span.textContent = filteredItems[i].text;
-      span.style.textDecoration = filteredItems[i].done ? "line-through" : "none";
+     
+      const li = createTodoItem(filteredItems[i]);
 
-      //チェックボックス
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-
-      checkbox.checked = filteredItems[i].done;
-
-      checkbox.onchange = function(){
-         filteredItems[i].done = checkbox.checked;
-         localStorage.setItem("todo", JSON.stringify(items));
-         renderList();
-      };
-
-      const button = document.createElement("button");
-      button.textContent = "削除";
-      button.onclick = function(){
-      removeItem(filteredItems[i].id);
-      };
-
-      const editButton = document.createElement("button");
-      editButton.textContent = "編集";
-      editButton.onclick = function() {
-         const newText = prompt("変更してください", filteredItems[i].text);
-        
-          if (newText !== null && newText.trim() !== "") {
-        
-            const targetId = filteredItems[i].id;
-            const targetItem = items.find(function(item){
-              return item.id === targetId;
-            });
-
-            targetItem.text = newText;
-        
-            localStorage.setItem("todo", JSON.stringify(items));
-        
-            renderList();
-          }
-      };
-
-     li.appendChild(checkbox);
-     li.appendChild(span);
-     li.appendChild(button);
-     li.appendChild(editButton);
-     list.appendChild(li);
+      list.appendChild(li);
      
     }
       updateTaskCount();
