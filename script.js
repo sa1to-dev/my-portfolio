@@ -24,6 +24,8 @@ console.log("JSスタート!");
    let items = JSON.parse(localStorage.getItem("todo")) || [];
 
    let currentFilter = "all";
+
+   let searchKeyword = "";
    
    const input = document.getElementById("newItem");
    
@@ -91,25 +93,11 @@ console.log("JSスタート!");
   document.getElementById("searchBtn")
   .addEventListener("click",function(){
 
-    const keyword =
+    searchKeyword =
      document.getElementById("searchInput").value;
     
-    const result = items.filter(function(item){
-      return item.text.includes(keyword);
+    renderList();
 
-    });
-
-    const list = document.getElementById("list");
-
-    list.innerHTML ="";
-
-    for(let i =0; i < result.length; i++){
-      const li = document.createElement("li");
-
-      li.textContent = result[i].text;
-
-      list.appendChild(li);
-    }
   });
 
   renderList();
@@ -204,6 +192,12 @@ console.log("JSスタート!");
     filteredItems = items.filter(function(item){
       return item.done === true;
     });
+  }
+
+  if(searchKeyword !== ""){
+  filteredItems = filteredItems.filter(function(item){
+    return item.text.includes(searchKeyword);
+  });
   }
 
    if(filteredItems.length === 0){
