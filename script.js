@@ -102,6 +102,15 @@ console.log("JSスタート!");
 
   renderList();
 
+  document.getElementById("searchInput")
+  .addEventListener("input", function(){
+
+    searchKeyword = this.value;
+
+    renderList();
+
+  });
+
   function createTodoItem(item){
 
   const li = document.createElement("li");
