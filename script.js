@@ -186,6 +186,9 @@ console.log("JSスタート!");
   }
 
   function renderList(){
+
+    console.log("renderList実行");
+
     const list = document.getElementById("list");
     list.innerHTML = "";
 
