@@ -270,24 +270,27 @@ console.log("JSスタート!");
    const memoList = document.getElementById("memoList");
 
    document.getElementById("memoBtn")
-     .addEventListener("click",function(){
+   .addEventListener("click",function(){
 
-      console.log(memoInput.value);
+    addMemo();
+
+   });
+
+     function addMemo(){
 
       if(memoInput.value.trim() === "") return;
 
       memos.push(memoInput.value);
 
       localStorage.setItem(
-      "memos",
+       "memos",
       JSON.stringify(memos)
-     );
+      );
 
-      renderMemo();
+     renderMemo();
 
-      memoInput.value = "";
-
-     });
+     memoInput.value = "";
+    }
 
      function renderMemo(){
 
@@ -331,20 +334,10 @@ console.log("JSスタート!");
 
    memoInput.addEventListener("keypress",function(e){
 
-    if(e.key === "Enter"){
+   if(e.key === "Enter"){
 
-      if(memoInput.value.trim() === "") return;
+    addMemo();
 
-      memos.push(memoInput.value);
+   }
 
-      localStorage.setItem(
-        "memos",
-        JSON.stringify(memos)
-      );
-
-      renderMemo();
-
-      memoInput.value = "";
-
-    }
    });
