@@ -312,6 +312,32 @@ console.log("JSスタート!");
 
         li.appendChild(button);
 
+        const editButton = document.createElement("button");
+
+        editButton.textContent = "編集";
+
+        editButton.onclick = function(){
+
+        const newText = prompt(
+         "変更してください",
+        memos[i]
+       );
+
+       if(newText !== null && newText.trim() !== ""){
+
+       memos[i] = newText;
+
+      localStorage.setItem(
+       "memos",
+        JSON.stringify(memos)
+      );
+
+      renderMemo();
+    }
+  };
+
+  li.appendChild(editButton);
+
         memoList.appendChild(li);
       }
 
