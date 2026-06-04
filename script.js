@@ -334,12 +334,16 @@ console.log("JSスタート!");
 
       renderMemo();
     }
-  };
+     };
 
-  li.appendChild(editButton);
+      li.appendChild(editButton);
 
         memoList.appendChild(li);
       }
+
+      document.getElementById("memoCount")
+      .textContent =
+       "メモ総数: " + memos.length + "件";
 
     }
 
