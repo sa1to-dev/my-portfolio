@@ -292,15 +292,26 @@ console.log("JSスタート!");
      memoInput.value = "";
     }
 
+    function createMemoItem(memo, index){
+
+      const li = document.createElement("li");
+
+        li.textContent = memo;
+      
+      return li;
+
+    }
+
      function renderMemo(){
 
       memoList.innerHTML = "";
 
       for(let i = 0; i < memos.length; i++){
 
-        const li = document.createElement("li");
-
-        li.textContent = memos[i];
+        const li = createMemoItem(
+          memos[i],
+          i
+        );
 
         const button = document.createElement("button");
 
