@@ -298,6 +298,16 @@ console.log("JSスタート!");
 
         li.textContent = memo;
       
+      const button = document.createElement("button");
+
+        button.textContent = "削除";
+
+        button.onclick = function(){
+          removeMemo(index);
+        };
+
+        li.appendChild(button);
+      
       return li;
 
     }
@@ -312,16 +322,6 @@ console.log("JSスタート!");
           memos[i],
           i
         );
-
-        const button = document.createElement("button");
-
-        button.textContent = "削除";
-
-        button.onclick = function(){
-          removeMemo(i);
-        };
-
-        li.appendChild(button);
 
         const editButton = document.createElement("button");
 
