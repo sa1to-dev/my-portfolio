@@ -338,14 +338,33 @@ console.log("JSスタート!");
 
     }
 
+    let memoSearchKeyword = "";
+    document.getElementById("memoSearch")
+   .addEventListener("input", function(){
+
+    memoSearchKeyword = this.value;
+
+    renderMemo();
+   });
+
      function renderMemo(){
 
       memoList.innerHTML = "";
 
-      for(let i = 0; i < memos.length; i++){
+      let filteredMemos = memos;
+
+      if(memoSearchKeyword !== ""){
+
+      filteredMemos = memos.filter(function(memo){
+      return memo.includes(memoSearchKeyword);
+      });
+
+     }
+
+      for(let i = 0; i < filteredMemos.length; i++){
 
         const li = createMemoItem(
-          memos[i],
+          filteredMemos[i],
           i
         );
 
