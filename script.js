@@ -21,6 +21,10 @@ console.log("JSスタート!");
       paragraph.textContent = "JS勉強中に進化しました";
     }
 
+    // ====================
+    // ToDoアプリ
+    // ====================
+
    let items = JSON.parse(localStorage.getItem("todo")) || [];
 
    let currentFilter = "all";
@@ -263,6 +267,10 @@ console.log("JSスタート!");
     document.getElementById("count").textContent = num;
    }
 
+   // ====================
+   // メモアプリ
+   // ==================== 
+
    let memos = 
      JSON.parse(localStorage.getItem("memos")) || [];
 
@@ -401,6 +409,10 @@ console.log("JSスタート!");
    }
 
    });
+
+   // ====================
+   // じゃんけんアプリ
+   // ====================
 
    function play(user){
 
